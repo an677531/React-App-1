@@ -4,19 +4,26 @@ import { useState, useCallback } from "react"
  * unordered list.
  * @returns Component
  */
+
 export default function Sidebar({ initialMenuItems }) {
   let [newMenuItem, setNewMenuItem] = useState("")
   // TODO: 2 Using a state hook, maintain the current menu items as an array state.
+  //I have reused some of the comented out lines of code to acomplish goals of todo.2
   let [menuItems, setMenuItems] = useState(initialMenuItems)
   let [filter, setFilter] = useState("")
   // Adds a single string passed in as parameter to the state element
   // "menuItems" that holds the set of current menu items.
+  //runs whenver it is called through button click
   let addMenuItem = useCallback(() => {
     console.log("Added menu item")
-    //   // TODO: 3. Add a new menu item to the correct variable associated with this class.
+    //   // TODO: 3. Add a new menu item to the correct variable associated with this class
     //   // This involves adding a parameter and changing a class instance variable (props).
+
+    //I have added in a conditional where trailing spaces are removed and it is not an empty string, then it will execute
     if (newMenuItem.trim()) {
+      //I create a new array and new item is added at the begining and then adds in the remaining items from the already existing array
       setMenuItems([newMenuItem, ...menuItems])
+      //Clears the input field
       setNewMenuItem("")
     }
   }, [menuItems, newMenuItem])
@@ -35,6 +42,7 @@ export default function Sidebar({ initialMenuItems }) {
         onChange={(event) => setNewMenuItem(event.target.value)}
       ></input>
       <br />
+      {/* I have modified the button to call the addMenuItem on click */}
       <button onClick={addMenuItem}>
         Add Item
       </button>
@@ -48,7 +56,7 @@ export default function Sidebar({ initialMenuItems }) {
       ></input>
 
       <ul>
-        {menuItems//
+        {menuItems//Here I have used .map to to todo.1 with rendering an unorder list of menu items and presenting each as li element, and added the needded filter menu items which converts the serched items to lower case and compares with outputs in the array, if anything matches then it keeps that
           .filter((item) => item.toLowerCase().includes(filter.toLowerCase())) // Filter items
           .map((item, index) => (
             <li key={index}>{item}</li> // Display filtered items
