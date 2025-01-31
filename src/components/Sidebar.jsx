@@ -46,8 +46,9 @@ export default function Sidebar({ initialMenuItems }) {
         onChange={(event) => setFilter(event.target.value)}
         placeholder="Filter by..."
       ></input>
+
       <ul>
-        {menuItems
+        {menuItems//
           .filter((item) => item.toLowerCase().includes(filter.toLowerCase())) // Filter items
           .map((item, index) => (
             <li key={index}>{item}</li> // Display filtered items
